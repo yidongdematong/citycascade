@@ -1,4 +1,5 @@
  let id = 0;
+let  baseURL="/citycascade/";
 
  var vm=new Vue({
       el: '#cityCascade_id',
@@ -30,9 +31,29 @@
                 },
                  formLabelWidth: '120px',
       },
+      created: function () {
+                      this.getAreaParentList();
+                      },
       methods :{
             doEnsureAddShipAddress: function (){
                     console.log("保存");
+                },
+                getAreaParentList:function(){
+                    //初始
+                    let pid =0;
+                    var areaEntity ={};
+                    areaEntity.pid=pid;
+                    $.ajax({url: baseURL+"area/list", async: true, type: "POST", dataType: "json",
+                            data: areaEntity,
+                           success: function (results) {
+                            var resultCode=results.code;
+                           console.log(results);
+                           if(resultCode==0){
+                                    console.log("code");
+                               }
+                        }
+                        });
+
                 }
       }
 
