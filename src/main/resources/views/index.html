@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>城市级联</title>
+    <style type="text/css">
+        @import url("//unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css");
+     </style>
+</head>
+<body>
+<div id="cityCascade_id">
+    <el-container>
+        <el-header></el-header>
+        <el-main>
+            <el-row :gutter="20">
+            <el-col :span="8">
+                <div >
+
+                    <el-form :model="formShipAddress">
+                        <el-form-item label="收货人：" :label-width="formLabelWidth">
+                            <el-input v-model="formShipAddress.addressee" autocomplete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item label="所在地区" :label-width="formLabelWidth">
+                            <el-cascader :props="props"></el-cascader>
+                        </el-form-item>
+                        <el-form-item label="详细地址" :label-width="formLabelWidth">
+                            <el-input v-model="formShipAddress.ship_address_detail" autocomplete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item label="手机号码" :label-width="formLabelWidth">
+                            <el-input v-model="formShipAddress.ship_addressee_mobile_phone" autocomplete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item label="固定电话" :label-width="formLabelWidth">
+                            <el-input v-model="formShipAddress.ship_address_fixed_phone" autocomplete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item label="邮箱地址" :label-width="formLabelWidth">
+                            <el-input v-model="formShipAddress.ship_addressee_email" autocomplete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item :label-width="formLabelWidth">
+                            <el-button type="primary" @click="doEnsureAddShipAddress">保存</el-button>
+                        </el-form-item>
+                    </el-form>
+                </div>
+            </el-col>
+
+            </el-row>
+            <el-row :gutter="20" type="center">
+                <el-col :span="24">
+                    <div>
+
+                    </div>
+                </el-col>
+            </el-row>
+
+        </el-main>
+    </el-container>
+
+</div>
+
+
+<script type="text/javascript" charset="utf-8" src="js/customer/resources.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/index.js"></script>
+</body>
+</html>

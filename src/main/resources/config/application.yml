@@ -13,7 +13,7 @@ spring:
        active: dev #激活dev配置
 
   resources:
-   static-locations: classpath:/static/
+   static-locations: classpath:/static/,classpath:/views/
 # Mybatis配置
 mybatis:
   mapperLocations: classpath:mapper/**/*.xml
