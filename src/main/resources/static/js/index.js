@@ -5,7 +5,6 @@ let    tempDataList={};
       el: '#cityCascade_id',
       data:  {
 loading:true,
-       value: [],
        options: []
        ,
        childrenList:[],
@@ -29,46 +28,69 @@ loading:true,
                  formLabelWidth: '120px',
                  tempValue:[],
                  tempName:'',
-                 charConn:'/'
+                 charConn:'/',
+                 rules:{
+                     addressee: [
+                                 { required: true, message: '请输入收件人', trigger: 'blur' }
+                               ],
+                      ship_address:[
+                          { required: true, message: '请选择所在地区', trigger: 'change' }
+                      ],
+
+                      ship_address_detail:[
+                          { required: true, message: '请输入详细地址', trigger: 'blur' }
+                      ],
+
+                      ship_addressee_mobile_phone:[
+                          { required: true, message: '请输入收件人手机', trigger: 'blur' }
+                      ]
+                 }
       },
       created: function () {
                       this.getAreaParentList();
                       },
       methods :{
-            doEnsureAddShipAddress: function (){
-                this.shipAddressEntity.addressee =this.formShipAddress.addressee;
-                this.shipAddressEntity.ship_address_detail=this.formShipAddress.ship_address_detail;
-                this.shipAddressEntity.ship_addressee_mobile_phone=this.formShipAddress.ship_addressee_mobile_phone;
-                this.shipAddressEntity.ship_addressee_email=this.formShipAddress.ship_addressee_email;
-                this.shipAddressEntity.ship_address_fixed_phone=this.formShipAddress.ship_address_fixed_phone;
+            doEnsureAddShipAddress: function (formName){
+                        this.$refs[formName].validate((valid) => {
+                          if (valid) {
+                       this.shipAddressEntity.addressee =this.formShipAddress.addressee;
+                                     this.shipAddressEntity.ship_address_detail=this.formShipAddress.ship_address_detail;
+                                     this.shipAddressEntity.ship_addressee_mobile_phone=this.formShipAddress.ship_addressee_mobile_phone;
+                                     this.shipAddressEntity.ship_addressee_email=this.formShipAddress.ship_addressee_email;
+                                     this.shipAddressEntity.ship_address_fixed_phone=this.formShipAddress.ship_address_fixed_phone;
 
 
-                   $.ajax({url: baseURL+"area/area", async: true, type: "POST", dataType: "json",
-                                            data: {'m':JSON.stringify(vm.tempValue)},
-                                           success: function (results) {
-                                            var resultCode=results.code;
-                                            var i=0;
-                                           if(resultCode==0){
-                                               for(let a of results.result){
-                                                   i++;
-                                                   if(i>2){
-                                                          vm.tempName= vm.tempName.concat(a.name);
-                                                   }else{
-                                                         vm.tempName= vm.tempName.concat(a.name+"/");
-                                                   }
+                                        $.ajax({url: baseURL+"area/area", async: true, type: "POST", dataType: "json",
+                                                                 data: {'m':JSON.stringify(vm.tempValue)},
+                                                                success: function (results) {
+                                                                 var resultCode=results.code;
+                                                                 var i=0;
+                                                                if(resultCode==0){
+                                                                    for(let a of results.result){
+                                                                        i++;
+                                                                        if(i>2){
+                                                                               vm.tempName= vm.tempName.concat(a.name);
+                                                                        }else{
+                                                                              vm.tempName= vm.tempName.concat(a.name+ vm.charConn);
+                                                                        }
 
-                                               }
+                                                                    }
 
-                         vm.shipAddressEntity.ship_address=vm.tempName;
-                                               }
-                                        }
-                                        });
-                                        vm.tempName='';
+                                              vm.shipAddressEntity.ship_address=vm.tempName;
+                                                                    }
+                                                             }
+                                                             });
+                                                             vm.tempName='';
+                          } else {
+                            return false;
+                          }
+                        });
+
+
 
                 },
                  handleChange :function(node) {
                      vm.tempValue=node;
-                     console.log(vm.tempValue);
                       }
                 ,
                 getAreaParentList:function(){
