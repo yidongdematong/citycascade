@@ -1,14 +1,11 @@
- let id = 0;
+let id = 0;
 let  baseURL="/citycascade/";
 let    tempDataList={};
  var vm=new Vue({
       el: '#cityCascade_id',
       data:  {
-loading:true,
-       options: []
-       ,
+       options: [],
        childrenList:[],
-
                 formShipAddress:{
                         addressee:'',//收件人
                     ship_address:'',//收件地址（行政地址）
@@ -52,16 +49,16 @@ loading:true,
       methods :{
             doEnsureAddShipAddress: function (formName){
                         this.$refs[formName].validate((valid) => {
-                          if (valid) {
+                        if (valid) {
                        this.shipAddressEntity.addressee =this.formShipAddress.addressee;
-                                     this.shipAddressEntity.ship_address_detail=this.formShipAddress.ship_address_detail;
-                                     this.shipAddressEntity.ship_addressee_mobile_phone=this.formShipAddress.ship_addressee_mobile_phone;
-                                     this.shipAddressEntity.ship_addressee_email=this.formShipAddress.ship_addressee_email;
-                                     this.shipAddressEntity.ship_address_fixed_phone=this.formShipAddress.ship_address_fixed_phone;
+                       this.shipAddressEntity.ship_address_detail=this.formShipAddress.ship_address_detail;
+                       this.shipAddressEntity.ship_addressee_mobile_phone=this.formShipAddress.ship_addressee_mobile_phone;
+                       this.shipAddressEntity.ship_addressee_email=this.formShipAddress.ship_addressee_email;
+                       this.shipAddressEntity.ship_address_fixed_phone=this.formShipAddress.ship_address_fixed_phone;
 
 
                                         $.ajax({url: baseURL+"area/area", async: true, type: "POST", dataType: "json",
-                                                                 data: {'m':JSON.stringify(vm.tempValue)},
+                                                                 data: {'ids':JSON.stringify(vm.tempValue)},
                                                                 success: function (results) {
                                                                  var resultCode=results.code;
                                                                  var i=0;
