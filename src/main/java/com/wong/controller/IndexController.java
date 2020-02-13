@@ -44,10 +44,10 @@ public class IndexController {
      * 根据cid地区数据
      * */
     @PostMapping(URI_INDEX_AREA)
-    public R doQueryArea(@RequestParam  String  m) throws IOException {
+    public R doQueryArea(@RequestParam  String  ids) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        int[] s=mapper.readValue(m,int[].class);
-        return   R.ok().put("result", indexService.getAreaByCid(s));
+        int[] idArray=mapper.readValue(ids,int[].class);
+        return   R.ok().put("result", indexService.getAreaByCid(idArray));
 
 
     }

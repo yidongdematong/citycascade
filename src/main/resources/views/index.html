@@ -5,11 +5,13 @@
     <title>城市级联</title>
     <style type="text/css">
         @import url("//unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css");
-
+        [v-cloak] {
+            display: none
+        }
     </style>
 </head>
 <body >
-<div id="cityCascade_id">
+<div id="cityCascade_id"  v-cloak>
     <el-container>
         <el-header></el-header>
         <el-main>
